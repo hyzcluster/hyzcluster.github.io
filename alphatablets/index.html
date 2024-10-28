@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="T3Bench: Benchmarking Current Progress in Text-to-3D Generation">
+  <meta name="keywords" content="Text-to-3D NeRF DreamFusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>T3Bench</title>
+  <link href="./static/ico/logo.ico" rel="icon" type="image/x-ico" />
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/table.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <img src="./static/images/logo_website.png" alt="Logo" width="500px">
+            <h1 class="title is-1 publication-title">AlphaTablets: A Generic Plane Representation for 3D Planar Reconstruction from Monocular Videos</h1>
+            <h4 class="subtitle is-4 publication-subtitle" style="margin-top: 10px;"><b>NeurIPS 2024</b></h4>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="mailto:hyz22@mails.tsinghua.edu.cn">Yuze He</a><sup>1</sup>,</span>
+              <span class="author-block">
+                  Wang Zhao<sup>1</sup>,
+                </span>
+              <span class="author-block">
+                <a href="http://b1ueber2y.me/">Shaohui Liu</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                Yubin Hu<sup>1</sup>,
+              </span>
+              <br>
+              <span class="author-block">
+                <a href="mailto:bys22@mails.tsinghua.edu.cn">Yushi Bai</a><sup>1</sup>,</span>
+              </span>
+              <span class="author-block">
+                Yu-Hui Wen<sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://yongjinliu.github.io/">Yong-Jin Liu</a><sup>1</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Tsinghua University</span>&nbsp;&nbsp;&nbsp;
+              <span class="author-block"><sup>2</sup>ETH Zurich</span>&nbsp;&nbsp;&nbsp;
+              <span class="author-block"><sup>3</sup>Beijing Jiaotong University</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+                <!-- BibTeX. -->
+                <span class="link-block">
+                  <a href="#BibTeX" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fa fa-code"></i>
+                    </span>
+                    <span>BibTeX</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <img src="static/images/pipeline.png" width="100%">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" style="color: #522265;">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We introduce <b>AlphaTablets</b>, a novel and generic representation of 3D planes that features continuous 3D surface and precise boundary delineation. By representing 3D planes as rectangles with alpha channels, AlphaTablets combine the advantages of current 2D and 3D plane representations, enabling accurate, consistent and flexible modeling of 3D planes. 
+            </p>
+            <p>
+              We derive differentiable rasterization on top of AlphaTablets to efficiently render 3D planes into images, and propose a novel bottom-up pipeline for 3D planar reconstruction from monocular videos. Starting with 2D superpixels and geometric cues from pre-trained models, we initialize 3D planes as AlphaTablets and optimize them via differentiable rendering. An effective merging scheme is introduced to facilitate the growth and refinement of AlphaTablets.
+            </p>
+            <p>
+              Through iterative optimization and merging, we reconstruct complete and accurate 3D planes with solid surfaces and clear boundaries. Extensive experiments on the ScanNet dataset demonstrate state-of-the-art performance in 3D planar reconstruction, underscoring the great potential of AlphaTablets as a generic 3D plane representation for various applications.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>TODO</code></pre>
+    </div>
+  </section>
+
+  <a href="https://www.flagcounter.me/details/d7q" hidden><img src="https://www.flagcounter.me/d7q/" alt="Flag Counter"></a>
+
+</body>
+
+</html>
