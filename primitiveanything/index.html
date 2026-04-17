@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="PrimitiveAnything: Human-Crafted 3D Primitive Assembly Generation with Auto-Regressive Transformer">
+  <meta name="keywords" content="3D Generation Shape Abstraction Lego Primitive Decomposition Semantic">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PrimitiveAnything</title>
+  <!-- <link href="./static/ico/logo.ico" rel="icon" type="image/x-ico" /> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+  <script src="./static/js/typeahead.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/table.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">PrimitiveAnything: Human-Crafted 3D Primitive Assembly Generation with Auto-Regressive Transformer</h1>
+            <h4 class="subtitle is-4 publication-subtitle" style="margin-top: 10px;"><b>SIGGRAPH 2025</b></h4>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                Jingwen Ye<sup>1*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://hyzcluster.github.io">Yuze He</a><sup>1,2*</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=7blugpkAAAAJ">Yanning Zhou</a><sup>1†</sup>,
+              </span>
+              <span class="author-block">
+                Yiqin Zhu<sup>1</sup>,
+              </span>
+              <br>
+              <span class="author-block">
+                Kaiwen Xiao<sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://yongjinliu.github.io/">Yong-Jin Liu</a><sup>2†</sup>
+              </span>,
+              <span class="author-block">
+                Wei Yang<sup>1</sup>,
+              </span>
+              <span class="author-block">
+                Xiao Han<sup>1†</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Tencent AIPD</span>&nbsp;&nbsp;&nbsp;
+              <span class="author-block"><sup>2</sup>Tsinghua University</span>&nbsp;&nbsp;&nbsp;
+            </div>
+
+            <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>*</sup>Equal Contributions</span>&nbsp;&nbsp;&nbsp;
+              <span class="author-block"><sup>†</sup>Corresponding Authors</span>&nbsp;&nbsp;&nbsp;
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper(TBD)</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code(TBD)</span>
+                  </a>
+                </span>
+                <!-- Model. -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/hyz317/PrimitiveAnything" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fa fa-database"></i>
+                    </span>
+                    <span>Model</span>
+                  </a>
+                </span>
+                <!-- Model. -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/spaces/hyz317/PrimitiveAnything" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">&#129303;</span>
+                    <span>Demo</span>
+                  </a>
+                </span>
+                <!-- BibTeX. -->
+                <span class="link-block">
+                  <a href="#BibTeX" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fa fa-code"></i>
+                    </span>
+                    <span>BibTeX</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <img src="static/images/teaser.jpg" width="100%">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" style="color: #522265;">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+            Shape primitive abstraction, which decomposes complex 3D shapes into simple geometric elements, plays a crucial role in human visual cognition and has broad applications in computer vision and graphics. While recent advances in 3D content generation have shown remarkable progress, existing primitive abstraction methods either rely on geometric optimization with limited semantic understanding or learn from small-scale, category-specific datasets, struggling to generalize across diverse shape categories.
+            </p>
+            <p>
+            We present <b>PrimitiveAnything</b>, a novel framework that reformulates shape primitive abstraction as a primitive assembly generation task.
+            </p>
+            <p>
+            PrimitiveAnything includes a shape-conditioned primitive transformer for auto-regressive generation and an ambiguity-free parameterization scheme to represent multiple types of primitives in a unified manner. The proposed framework directly learns the process of primitive assembly from large-scale human-crafted abstractions, enabling it to capture how humans decompose complex shapes into primitive elements.
+            </p>
+            <p>
+            Through extensive experiments, we demonstrate that PrimitiveAnything can generate high-quality primitive assemblies that better align with human perception while maintaining geometric fidelity across diverse shape categories. It benefits various 3D applications and shows potential for enabling primitive-based user-generated content (UGC) in games.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3" style="color: #522265;">Video</h2>
+          <div class="content has-text-justified">
+            <video class="video" controls playsinlne style="width: 100%; display: block; margin: 0 auto;">
+              <source src="static/videos/demo_cr_l.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Method Overview. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3" style="color: #522265;">Method Overview</h2>
+          <div class="content has-text-justified">
+            <p>
+              We propose <b>PrimitiveAnything</b> to decompose complex shapes into 3D primitive assembly via the auto-regressive transformer. Given
+human-crafted 3D primitive abstraction contents, we first design an ambiguity-free scheme to parameterize each primitive 𝑝 into class label 𝑐, translation
+𝑡, rotation 𝑟 and scale 𝑠, and then employ a primitive encoder to form primitive token ℎ. Meanwhile, a shape encoder encodes 3D shape features C from
+sampled point clouds. Our primitive transformer S predicts the next primitive based on the input condition C and previously generated primitives. To model
+the dependencies among primitive attributes, we proposed a cascaded primitive decoder D that sequentially predicts primitive attributes.
+            </p>
+            <img src="static/images/framework2.png" width="100%">
+          </div>
+        </div>
+      </div>
+      <!--/ Method Overview. -->
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" style="color: #522265;">Results from text and images</h2>
+          <div class="content has-text-justified">
+            <img src="static/images/app2.png" width="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" style="color: #522265;">Comparisons</h2>
+          <div class="content has-text-justified">
+            <img src="static/images/comp_main2.png" width="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{ye2025primitiveanything,
+  title={PrimitiveAnything: Human-crafted 3D primitive assembly generation with auto-regressive Transformer},
+  author={Ye, Jingwen and He, Yuze and Zhou, Yanning and Zhu, Yiqin and Xiao, Kaiwen and Liu, Yong-Jin and Yang, Wei and Han, Xiao},
+  booktitle={Proceedings of the Special Interest Group on Computer Graphics and Interactive Techniques Conference Conference Papers},
+  pages={1--12},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+
+  <a href="https://www.flagcounter.me/details/e9K"><img src="https://www.flagcounter.me/e9K/" alt="Flag Counter" hidden></a>
+
+</body>
+
+</html>
