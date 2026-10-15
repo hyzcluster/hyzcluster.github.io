@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PPMem — Persistent Planar Memory for Video World Models</title>
+  <meta name="description" content="PPMem generates camera-controlled video from a single image while accumulating a persistent, plane-based 3D memory. Explore RGB, surface normals, and depth.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='7' width='10' height='22' rx='1' fill='%23294967'/%3E%3Crect x='15' y='3' width='10' height='22' rx='1' fill='%235d96c4'/%3E%3Cpath d='M7 19h22v8H7z' fill='%2389bfdf'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css?v=20260926-teaser980">
+</head>
+<body>
+  <a class="skip-link" href="#explore">Skip to results</a>
+  <header class="site-nav">
+    <a class="wordmark" href="#top" aria-label="PPMem home">PPMem<span class="brand-period">.</span></a>
+    <nav aria-label="Page sections"><a href="#explore">Results</a><a href="#method">Method</a><a href="#comparisons">Comparisons</a><a href="#video">Video</a></nav>
+  </header>
+  <main id="top">
+    <section class="hero" aria-labelledby="paper-title">
+      <div class="logo-crop"><img src="./assets/ppmem.png" alt="PPMem" width="1024" height="558" fetchpriority="high"></div>
+      <h1 id="paper-title">Persistent Planar Memory<br>for Video World Models</h1>
+      <div id="authors" class="authors">
+        <a href="https://hyzcluster.github.io/" target="_blank" rel="noopener noreferrer">Yuze He<sup>1,2</sup></a>
+        <a href="https://icetttb.github.io/" target="_blank" rel="noopener noreferrer">Bin Tan<sup>2</sup></a>
+        <a href="https://zelingao98.github.io/" target="_blank" rel="noopener noreferrer">Zelin Gao<sup>2</sup></a>
+        <a href="https://shenyujun.github.io/" target="_blank" rel="noopener noreferrer">Yujun Shen<sup>2</sup></a>
+        <a href="https://cg.cs.tsinghua.edu.cn/people/~Yongjin/Yongjin.htm" target="_blank" rel="noopener noreferrer">Yong-Jin Liu<sup>1</sup></a>
+        <a href="https://xuenan.net/" target="_blank" rel="noopener noreferrer">Nan Xue<sup>2</sup></a>
+        <a href="https://justimyhxu.github.io/" target="_blank" rel="noopener noreferrer">Yinghao Xu<sup>3,2</sup></a>
+      </div>
+      <div id="affiliations" class="affiliations">
+        <span><sup>1</sup>Tsinghua University</span>
+        <span><sup>2</sup>Ant Group</span>
+        <span><sup>3</sup>HKUST</span>
+      </div>
+      <p class="venue">NeurIPS 2026</p>
+      <p class="hero-description">Camera-controlled video generation<br class="mobile-break"> with persistent 3D memory.</p>
+      <div class="resource-links" aria-label="Project resources">
+        <a id="paper-link" class="resource unavailable" aria-disabled="true" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg>Paper<span class="soon">Soon</span></a>
+        <a id="code-link" class="resource" href="https://github.com/hyz317/PPMem" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>Code</a>
+        <a id="model-link" class="resource" href="https://huggingface.co/hyz317/PPMem" target="_blank" rel="noopener noreferrer"><img class="model-mark" src="./assets/huggingface.svg" width="20" height="20" alt="Hugging Face">Model</a>
+        <a class="resource primary" href="#video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7z"/></svg>Watch video</a>
+      </div>
+    </section>
+
+    <section class="explorer wide" id="explore" aria-label="Interactive generation results">
+      <div class="explorer-heading"><span>Camera-controlled generation</span><span class="eyebrow">VIDEO &amp; GEOMETRY</span></div>
+      <div class="explorer-toolbar">
+        <div class="segmented" role="group" aria-label="Camera motion">
+          <button type="button" data-camera="repeat" aria-pressed="true">Repeat</button>
+          <button type="button" data-camera="spin" aria-pressed="false">360°</button>
+          <button type="button" data-camera="handheld" aria-pressed="false">Handheld</button>
+        </div>
+        <div class="view-tabs" role="group" aria-label="Visualization">
+          <button type="button" data-view="rgb" aria-pressed="true">RGB</button>
+          <button type="button" data-view="normal" aria-pressed="false">Normal</button>
+          <button type="button" data-view="depth" aria-pressed="false">Depth</button>
+        </div>
+      </div>
+      <div class="scene-grid" id="scene-grid">
+        <figure class="scene"><canvas width="1024" height="576" role="img" aria-label="Corridor generated video">Generated views of a corridor.</canvas><figcaption>Corridor</figcaption></figure>
+        <figure class="scene"><canvas width="1024" height="576" role="img" aria-label="Amusement park generated video">Generated views of an amusement park.</canvas><figcaption>Amusement park</figcaption></figure>
+        <figure class="scene"><canvas width="1024" height="576" role="img" aria-label="Courtyard generated video">Generated views of a courtyard.</canvas><figcaption>Courtyard</figcaption></figure>
+        <figure class="scene"><canvas width="1024" height="576" role="img" aria-label="Rooftop generated video">Generated views of a rooftop.</canvas><figcaption>Rooftop</figcaption></figure>
+      </div>
+      <div class="comparison-control" id="comparison-control" hidden><span id="split-left">Normal</span><input id="split" type="range" min="0" max="100" step="1" value="50" aria-label="Comparison divider"><span id="split-right">RGB</span></div>
+      <div class="playback-controls">
+        <button id="play" class="play-button" type="button" aria-label="Play generated videos"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="play-icon" d="m8 5 11 7-11 7z"/></svg><span id="play-text">Play</span></button>
+        <input id="timeline" type="range" min="0" max="250" step="1" value="0" aria-label="Generated video progress">
+        <output id="time" for="timeline">0.0 / 16.7 s</output>
+      </div>
+      <div class="explorer-caption"><p id="motion-caption">Four forward–backward visits to the same scene.</p><p id="viewer-hint">Choose Normal or Depth to compare geometry with RGB.</p></div>
+      <p id="viewer-error" role="alert" hidden></p>
+      <video id="atlas" muted playsinline preload="metadata" hidden></video>
+      <noscript><p class="noscript-message">Enable JavaScript to explore synchronized views, or watch the full video below.</p></noscript>
+    </section>
+
+    <section class="text-section" id="abstract" aria-labelledby="abstract-title">
+      <p class="section-kicker">THE IDEA</p><h2 id="abstract-title">Persistent memory, explicit geometry.</h2>
+      <p class="lead">PPMem generates video from a single image and a camera trajectory, while building a persistent 3D memory from plane primitives.</p>
+      <p>Walls, floors, facades, and other surfaces become a compact set of oriented planes. As generation proceeds, newly predicted geometry is merged into this memory and rendered from upcoming camera viewpoints to guide subsequent video segments.</p>
+      <details class="abstract-details"><summary>Read the abstract <span aria-hidden="true">+</span></summary><div>
+        <p>Video world models that generate and explore environments at scale need a persistent 3D memory of what they have produced. Plane primitives offer a natural candidate: a compact set of oriented planes captures the dominant structural elements (e.g., walls, floors, facades) of indoor and outdoor scenes, while requiring only 7 parameters per primitive.</p>
+        <p>We present <strong>PPMem</strong>, a video world model that adopts plane primitives as its persistent 3D memory. PPMem augments a video diffusion transformer with a planar prediction head and a Depth Token Fusion (DTF) module: each autoregressive chunk jointly produces RGB video and planar geometry, which merges into a persistent plane memory that conditions subsequent chunks via rendered depth. The resulting memory is three orders of magnitude more compact than per-pixel point clouds (~100K primitives, ~5 MB for a full scene), geometrically explicit (metric depth, normals, exportable surfaces), cross-view consistent (jointly predicted by the shared backbone), and adaptive (refined by the merging procedure as generation proceeds). On DL3DV and RealEstate10K, PPMem outperforms prior 3D-grounded world models in video quality while jointly producing metric-scale depth, surface normals, and exportable planar geometry, sustaining coherence across hundreds of frames under large viewpoint changes.</p>
+      </div></details>
+    </section>
+
+    <figure class="paper-figure wide teaser-figure">
+      <a href="./assets/teaser.png" data-lightbox data-caption="Generated views and the growing persistent plane memory, from Figure 1 of the paper." aria-label="Enlarge generated views and plane memory figure"><img src="./assets/teaser.png" width="2200" height="1159" loading="lazy" alt="Indoor and outdoor generated video sequences, with insets showing the accumulated plane memory at successive camera views."></a>
+      <figcaption>The scene grows in video and in memory. Insets show the accumulated planes as the camera explores.</figcaption>
+    </figure>
+
+    <section class="section-shell" id="method" aria-labelledby="method-title">
+      <div class="section-heading"><p class="section-kicker">METHOD</p><h2 id="method-title">Method overview</h2><p>Planar geometry connects one video segment to the next.</p></div>
+      <figure class="paper-figure method-figure"><a href="./assets/method.png" data-lightbox data-caption="PPMem architecture overview, from Figure 2 of the paper." aria-label="Enlarge PPMem architecture diagram"><img src="./assets/method.png" width="2200" height="671" loading="lazy" alt="PPMem architecture: a video diffusion transformer, plane prediction head, Depth Token Fusion module, and persistent plane pool with rendered conditioning."></a></figure>
+      <div class="method-steps">
+        <article><span class="step-number">01</span><h3>Predict planes</h3><p>A plane prediction head extracts structured geometry from the video model’s features. Each plane is described by seven parameters.</p></article>
+        <article><span class="step-number">02</span><h3>Update memory</h3><p>New planes are merged with earlier geometry, removing redundant or inconsistent surfaces as the scene expands.</p></article>
+        <article><span class="step-number">03</span><h3>Condition new views</h3><p>The accumulated memory is rendered at the next camera poses, providing geometric conditioning for subsequent generation.</p></article>
+      </div>
+    </section>
+
+    <section class="section-shell" id="comparisons" aria-labelledby="comparison-title">
+      <div class="section-heading"><p class="section-kicker">LONG-CONTEXT GENERATION</p><h2 id="comparison-title">Long-context comparisons</h2></div>
+      <figure class="paper-figure comparison-figure"><a href="./assets/comparison.png" data-lightbox data-caption="Qualitative long-context comparison from the paper. All method labels and frame indices are retained." aria-label="Enlarge qualitative comparison"><img src="./assets/comparison.png" width="2200" height="1438" loading="lazy" alt="Long-context video comparison showing ground truth, PPMem, and baseline methods at the frame indices labeled in the paper."></a><figcaption>Rows follow time; columns compare methods. Select the figure to inspect scene structure and appearance.</figcaption></figure>
+    </section>
+
+    <section class="video-section section-shell" id="video" aria-labelledby="video-title">
+      <div class="section-heading"><p class="section-kicker">VIDEO</p><h2 id="video-title">Full demonstration</h2><p>From persistent plane memory to repeated visits, rotations, and handheld camera motion.</p></div>
+      <video id="full-demo" controls playsinline preload="none" poster="./assets/video-poster-v29.jpg" aria-label="PPMem full demonstration"><source src="https://huggingface.co/hyz317/PPMem/resolve/main/assets/ppmem-demo.mp4" type="video/mp4">Your browser cannot play this video. <a href="https://huggingface.co/hyz317/PPMem/resolve/main/assets/ppmem-demo.mp4">Download the demonstration.</a></video>
+      <nav class="video-chapters" aria-label="Video chapters"><button type="button" data-time="9">Method</button><button type="button" data-time="61.533333">Repeat</button><button type="button" data-time="88.866667">360°</button><button type="button" data-time="113.933333">Handheld</button><button type="button" data-time="132.733333">Comparisons</button></nav>
+    </section>
+    <section class="citation-section section-shell" id="citation" aria-labelledby="bibtex-title">
+      <div class="citation-heading"><div><h2 id="bibtex-title">BibTeX</h2><span class="placeholder-badge">Placeholder</span></div><button type="button" id="copy-bibtex">Copy</button></div>
+      <pre class="bibtex-block"><code id="bibtex-entry">@article{he2026ppmem,
+  title   = {Persistent Planar Memory for Video World Models},
+  author  = {He, Yuze and Tan, Bin and Gao, Zelin and Shen, Yujun
+             and Liu, Yong-Jin and Xue, Nan and Xu, Yinghao},
+  journal = {arXiv preprint arXiv:2609.xxxxx},
+  year    = {2026}
+}</code></pre>
+    </section>
+    <footer><span>PPMem</span><p>Persistent Planar Memory for Video World Models</p><a href="#top">Back to top</a></footer>
+  </main>
+  <dialog id="figure-dialog" aria-labelledby="figure-caption"><div class="dialog-toolbar"><p id="figure-caption"></p><button type="button" id="close-figure" aria-label="Close enlarged figure">Close <span aria-hidden="true">×</span></button></div><img id="enlarged-figure" alt=""></dialog>
+  <script type="module" src="./app.js?cases=1ecdd41f6bc2&videos=hf20261015"></script>
+</body>
+</html>

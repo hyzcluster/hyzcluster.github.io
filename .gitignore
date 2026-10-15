@@ -1,1 +1,5 @@
 **/.DS_Store
+
+# PPMem videos are hosted on Hugging Face; keep local copies out of Pages.
+/ppmem/assets/*.mp4
+/images/ppmem-repeat.mp4

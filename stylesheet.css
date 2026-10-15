@@ -194,8 +194,10 @@
     text-decoration: none;
   }
 
-  td.paper-thumb img {
+  td.paper-thumb img,
+  td.paper-thumb video {
     width: 100%;
+    height: auto;
     max-height: 200px;
     object-fit: contain;
     object-position: center;
