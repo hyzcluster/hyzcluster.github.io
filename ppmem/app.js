@@ -1,4 +1,4 @@
-import cameras from './cases-1ecdd41f6bc2.js?v=hf20261015';
+import cameras from './cases-1ecdd41f6bc2.js?v=org20261016';
 const $ = selector => document.querySelector(selector);
 const video = $('#atlas'), grid = $('#scene-grid'), canvases = [...grid.querySelectorAll('canvas')];
 const contexts = canvases.map(c => c.getContext('2d'));
