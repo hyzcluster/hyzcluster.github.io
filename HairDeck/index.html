@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HairDeck — Animation-Ready Stylized Hair Cards from a Single Image</title>
+  <meta name="description" content="HairDeck generates stylized hair cards and the spring-bone chains that animate them, from a single image. Explore results, the method, and the demo.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="HairDeck: Animation-Ready Stylized Hair Cards from a Single Image">
+  <meta property="og:description" content="One image. A set of hair cards. Ready to move.">
+  <meta property="og:image" content="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/video-poster.jpg">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#video">Skip to results</a>
+  <header class="site-nav">
+    <a class="wordmark" href="#top">HairDeck<span>.</span></a>
+    <nav aria-label="Page sections">
+      <a href="#video">Video</a><a href="#results">Results</a><a href="#method">Method</a><a href="#comparisons">Comparisons</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="paper-title">
+      <p class="hero-brand">HairDeck<span class="brand-period">.</span></p>
+      <h1 id="paper-title">Animation-Ready Stylized Hair Cards<br class="desktop-break"> from a Single Image</h1>
+      <div class="authors" aria-label="Authors">
+        <a href="https://hyzcluster.github.io/" target="_blank" rel="noopener noreferrer">Yuze He<sup>1,*</sup></a>
+        <span>Yixiang Wei<sup>1,*</sup></span><a href="https://thuzhaowang.github.io/" target="_blank" rel="noopener noreferrer">Wang Zhao<sup>1</sup></a><a href="https://czzzzh.github.io/" target="_blank" rel="noopener noreferrer">Chuhao Chen<sup>2</sup></a><a href="https://amandaynzhou.github.io/" target="_blank" rel="noopener noreferrer">Yanning Zhou<sup>3,†</sup></a>
+        <a href="https://yongjinliu.github.io/" target="_blank" rel="noopener noreferrer">Yong-Jin Liu<sup>1,†</sup></a>
+      </div>
+      <div class="affiliations" aria-label="Author affiliations">
+        <span><sup>1</sup>Tsinghua University</span>
+        <span><sup>2</sup>Carnegie Mellon University</span>
+        <span><sup>3</sup>The Chinese University of Hong Kong</span>
+      </div>
+      <p class="author-notes"><span><sup>*</sup>Equal contribution.</span><span><sup>†</sup>Corresponding authors.</span></p>
+      <p class="hero-description">One image. A set of hair cards. <span class="no-wrap">Ready to move.</span></p>
+      <div class="resource-links" aria-label="Project resources">
+        <a class="resource" href="https://arxiv.org/abs/2610.40599" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg>Paper</a>
+        <a class="resource" href="https://github.com/hyz317/HairDeck" target="_blank" rel="noopener noreferrer"><img src="./assets/github.svg" alt="" width="19" height="19">Code</a>
+        <a class="resource" href="https://huggingface.co/hyz317/HairDeck" target="_blank" rel="noopener noreferrer"><img src="./assets/huggingface.svg" alt="" width="21" height="21">Models</a>
+        <a class="resource" href="#video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7z"/></svg>Video</a>
+        <a class="resource primary" href="https://huggingface.co/spaces/hyz317/HairDeck" target="_blank" rel="noopener noreferrer">Try the demo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      </div>
+    </section>
+
+    <section class="video-section section-shell" id="video" aria-label="HairDeck demonstration">
+      <video id="full-demo" controls playsinline preload="none" poster="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/video-poster.jpg" aria-label="HairDeck 40-second demonstration">
+        <source src="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/hairdeck-demo.mp4" type="video/mp4">
+        Your browser cannot play this video. <a href="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/hairdeck-demo.mp4">Download the demonstration.</a>
+      </video>
+      <p class="video-status sr-only" role="status"></p>
+    </section>
+
+    <section class="text-section" id="abstract" aria-labelledby="idea-title">
+      <p class="section-kicker">THE IDEA</p>
+      <h2 id="idea-title">A hairstyle is a set.<br>Generate it as one.</h2>
+      <p class="lead">HairDeck turns a single image into stylized hair cards and the spring-bone chains that animate them.</p>
+      <p>Each card becomes one token. A set diffusion transformer generates all cards together, preserving the individual ribbons that make up a hairstyle. The resulting asset carries per-card UVs and spring bones, and can be exported as a VRM avatar.</p>
+      <details class="abstract-details">
+        <summary>Read the abstract <span aria-hidden="true">+</span></summary>
+        <div><p>The hair of stylized characters in games and avatars is built from hair cards: artist-placed ribbons whose geometry is the visible hair, animated by spring bones. Existing image-based methods produce realistic hair or a single fused mesh, while CHARM, the only generator of stylized hair cards, decodes a hairstyle autoregressively as a long sequence of control points.</p>
+        <p>Observing that a card hairstyle is an unordered set of artist-defined primitives, we propose HairDeck, which generates it as one: each card is a single token, and a set diffusion transformer denoises all cards together. From a single image, HairDeck generates the cards and the spring-bone chains that drive them, yielding an animatable asset that exports to ready-to-use downstream formats.</p>
+        <p>On CHARM’s own test set, it lowers Chamfer distance by 44% and card-orientation error by more than half while running 33 times faster, and from single images it outperforms CHARM, image-to-3D pipelines and strand-based methods.</p></div>
+      </details>
+    </section>
+
+    <figure class="paper-figure teaser-figure wide">
+      <a href="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/teaser.jpg" data-lightbox data-caption="Single-image results. The central hairstyle shows the generated spring-bone chains." aria-label="Enlarge the HairDeck teaser">
+        <img src="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/teaser.jpg" alt="A wall of hexagonal rooms, each pairing an input image with a generated hairstyle. The central blue hairstyle includes orange spring-bone chains." width="3840" height="1748" loading="lazy">
+      </a>
+      <figcaption>From the image on the wall to the hair on the head. The central result shows the generated spring-bone chains.</figcaption>
+    </figure>
+
+    <section class="section-shell results-section" id="results" aria-labelledby="results-title">
+      <div class="section-heading"><p class="section-kicker">RESULTS</p><h2 id="results-title">Different characters. Individual cards.</h2><p>Explore generated hairstyles, drawing styles, and spring bones in motion.</p></div>
+      <div class="result-explorer">
+        <div class="explorer-toolbar">
+          <div class="segmented" role="tablist" aria-label="Result type">
+            <button id="tab-characters" type="button" role="tab" aria-selected="true" aria-controls="panel-characters" data-panel="characters">Characters</button>
+            <button id="tab-styles" type="button" role="tab" aria-selected="false" aria-controls="panel-styles" tabindex="-1" data-panel="styles">Drawing styles</button>
+            <button id="tab-motion" type="button" role="tab" aria-selected="false" aria-controls="panel-motion" tabindex="-1" data-panel="motion">Spring bones</button>
+          </div>
+          <span class="explorer-hint">Select a result to enlarge <span aria-hidden="true">↗</span></span>
+        </div>
+        <div class="result-panel" id="panel-characters" role="tabpanel" aria-labelledby="tab-characters" tabindex="0">
+          <div id="character-grid" class="character-grid"></div>
+          <noscript><img src="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/supp_gallery_uc.jpg" alt="Input images and generated hairstyles" width="3840" height="4901"></noscript>
+          <div class="gallery-footer">
+            <p>Input, back view, and generated front view.</p>
+            <div class="gallery-pages" role="group" aria-label="Character gallery pages">
+              <button type="button" data-page="0" aria-pressed="true" aria-label="Show results 1 to 8">01–08</button>
+              <button type="button" data-page="1" aria-pressed="false" aria-label="Show results 9 to 16">09–16</button>
+              <button type="button" data-page="2" aria-pressed="false" aria-label="Show results 17 to 24">17–24</button>
+              <button type="button" data-page="3" aria-pressed="false" aria-label="Show results 25 to 32">25–32</button>
+            </div>
+          </div>
+          <p class="sr-only" id="gallery-status" role="status"></p>
+        </div>
+        <div class="result-panel figure-panel" id="panel-styles" role="tabpanel" aria-labelledby="tab-styles" tabindex="0" hidden>
+          <a href="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/supp_style.jpg" data-lightbox data-caption="The same two characters across original, gacha, thick-paint, and semi-real drawing styles." aria-label="Enlarge drawing-style results"><img src="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/supp_style.jpg" width="3840" height="1048" loading="lazy" alt="Two characters in four drawing styles, with the hairstyle generated from each image below it."></a>
+          <p class="panel-caption">The same characters, different drawing styles. Each input is paired with its generated hairstyle.</p>
+        </div>
+        <div class="result-panel figure-panel" id="panel-motion" role="tabpanel" aria-labelledby="tab-motion" tabindex="0" hidden>
+          <a href="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/spring.jpg" data-lightbox data-caption="Generated spring-bone chains and the hair response during a 50-degree head turn." aria-label="Enlarge spring-bone results"><img src="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/spring.jpg" width="3840" height="916" loading="lazy" alt="Generated hair with orange spring-bone chains and successive frames during a head turn."></a>
+          <p class="panel-caption">A head turn with spring bones (top) and without them (bottom). Orange outlines show the hair without spring bones in the same frame. <a class="text-link" href="#video" data-seek="16">Watch the motion <span aria-hidden="true">↗</span></a></p>
+        </div>
+      </div>
+      <p class="result-note">Hair colors are sampled from the input images for display.</p>
+    </section>
+
+    <section class="section-shell" id="method" aria-labelledby="method-title">
+      <div class="section-heading"><p class="section-kicker">METHOD</p><h2 id="method-title">From a single image to moving hair.</h2><p>Hair cards, generated together and connected to spring bones.</p></div>
+      <figure class="paper-figure method-figure"><a href="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/method.png" data-lightbox data-caption="HairDeck overview: hair-card tokens, conditional set diffusion, and spring-bone generation." aria-label="Enlarge the method overview"><img src="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/method.png" alt="Three-stage HairDeck pipeline: encode each hair card as a token, jointly denoise the set conditioned on an image or point cloud, then decode the cards and generate spring-bone chains." width="4200" height="1080" loading="lazy"></a></figure>
+      <div class="method-steps">
+        <article><span class="step-number">01</span><h3>One card, one token</h3><p>A compact token represents each card’s geometry, root position, and orientation.</p></article>
+        <article><span class="step-number">02</span><h3>Generate the set together</h3><p>A set diffusion transformer denoises all card tokens jointly, conditioned on an image or a point cloud.</p></article>
+        <article><span class="step-number">03</span><h3>Make it move</h3><p>A second transformer generates spring-bone chains. Geometric skinning binds the cards to them.</p></article>
+      </div>
+      <details class="architecture-details"><summary>See the network architecture <span aria-hidden="true">+</span></summary><figure class="paper-figure"><a href="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/architecture.png" data-lightbox data-caption="HairDeck network architecture." aria-label="Enlarge the network architecture"><img src="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/architecture.png" alt="Detailed architecture of the card VAE, card set diffusion transformer, and chain diffusion transformer." width="4200" height="1525" loading="lazy"></a></figure></details>
+    </section>
+
+    <section class="section-shell" id="comparisons" aria-labelledby="comparisons-title">
+      <div class="section-heading"><p class="section-kicker">POINT-CLOUD GENERATION</p><h2 id="comparisons-title">Better geometry. Faster generation.</h2><p>Compared with CHARM on its 100 test hairstyles.</p></div>
+      <div class="metrics">
+        <div><strong>44<span>%</span></strong><p>lower Chamfer distance</p><small>0.0117 → 0.0066</small></div>
+        <div><strong>16.8<span>°</span></strong><p>card-orientation error</p><small>40.0° with CHARM</small></div>
+        <div><strong>33<span>×</span></strong><p>faster card generation</p><small>33.7 s → 1.01 s</small></div>
+      </div>
+      <p class="metric-note">Point-cloud benchmark. Timing measures card generation before meshing.</p>
+      <figure class="paper-figure comparison-figure"><a href="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/cmp_pc.jpg" data-lightbox data-caption="Point-cloud generation on CHARM’s test set. Original method labels are retained; Ours denotes HairDeck." aria-label="Enlarge point-cloud comparisons"><img src="https://huggingface.co/hyz317/HairDeck/resolve/main/assets/cmp_pc.jpg" alt="Point-cloud inputs with CHARM, MeshAnything V2, DeepMesh, BPT, HairDeck, and artist ground truth." loading="lazy"></a><figcaption>HairDeck generates individual cards. CHARM and HairDeck are colored per card, as in the artist ground truth.</figcaption></figure>
+    </section>
+
+    <section class="try-section section-shell" aria-labelledby="try-title">
+      <div><p class="section-kicker">TRY HAIRDECK</p><h2 id="try-title">Bring a character’s hair into 3D.</h2><p>Start with an image. Export hair cards, spring bones, and a VRM avatar.</p></div>
+      <a class="resource primary" href="https://huggingface.co/spaces/hyz317/HairDeck" target="_blank" rel="noopener noreferrer">Try the demo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+    </section>
+
+    <section class="citation-section section-shell" id="citation" aria-labelledby="citation-title">
+      <div class="citation-heading"><h2 id="citation-title">BibTeX</h2><button id="copy-bibtex" type="button">Copy</button></div>
+      <pre class="bibtex-block" tabindex="0"><code id="bibtex">@misc{he2026hairdeck,
+  title  = {HairDeck: Animation-Ready Stylized Hair Cards from a Single Image},
+  author = {Yuze He and Yixiang Wei and Wang Zhao and Chuhao Chen
+            and Yanning Zhou and Yong-Jin Liu},
+  year   = {2026},
+  eprint = {2610.40599},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2610.40599}
+}</code></pre>
+      <p class="sr-only" id="copy-status" role="status"></p>
+    </section>
+  </main>
+  <footer><a class="wordmark" href="#top">HairDeck<span>.</span></a><p>Animation-Ready Stylized Hair Cards from a Single Image</p><a class="back-top" href="#top">Back to top ↑</a></footer>
+  <dialog id="lightbox" aria-labelledby="lightbox-caption"><div class="dialog-toolbar"><p id="lightbox-caption"></p><button type="button" id="close-lightbox" aria-label="Close enlarged image">Close <span aria-hidden="true">×</span></button></div><div id="lightbox-content"></div></dialog>
+</body>
+</html>
